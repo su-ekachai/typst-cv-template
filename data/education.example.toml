@@ -1,0 +1,9 @@
+[[entry]]
+title = "University of Technology"
+location = "San Francisco, CA"
+date = "August 2012 - May 2016"
+degree = "B.S. in Computer Science"
+bullets = [
+  "Graduated Magna Cum Laude, GPA: 3.8/4.0",
+  "Teaching Assistant for Data Structures and Algorithms",
+]

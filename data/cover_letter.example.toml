@@ -1,0 +1,15 @@
+[company]
+target = "Hiring Manager"
+name = "Acme Corporation"
+street-address = "123 Innovation Drive"
+city = "San Francisco, CA 94105"
+
+[letter]
+job-position = "Senior Software Engineer"
+addressee = "Hiring Manager"
+use-signature = false
+paragraphs = [
+  "I am writing to express my strong interest in the Senior Software Engineer position at Acme Corporation. With over 6 years of experience building scalable distributed systems, I am excited about the opportunity to contribute to your engineering team.",
+  "In my current role at Tech Corp, I led the migration from a monolithic architecture to microservices, reducing deployment time by 70% and enabling independent team scaling. I have deep experience with the technologies in your stack including Python, Kubernetes, and event-driven architectures.",
+  "I would welcome the opportunity to discuss how my experience aligns with your team's goals. Thank you for considering my application, and I look forward to hearing from you.",
+]

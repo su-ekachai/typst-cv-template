@@ -1,0 +1,8 @@
+firstname = "John"
+lastname = "Doe"
+email = "john.doe@example.com"
+phone = "(+1) 555-123-4567"
+github = "johndoe"
+linkedin = "johndoe"
+homepage = "https://johndoe.dev"
+positions = ["Senior Software Engineer"]

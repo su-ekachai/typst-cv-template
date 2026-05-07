@@ -1,0 +1,19 @@
+[[entry]]
+title = "Open Source CLI Tool"
+github = "johndoe/awesome-cli"
+date = "Mar 2022 - Present"
+role = "Creator/Maintainer"
+bullets = [
+  "Built a developer productivity CLI tool with 500+ GitHub stars and 50+ contributors",
+  "Designed plugin architecture enabling community extensions without core modifications",
+]
+
+[[entry]]
+title = "Real-time Dashboard"
+github = "johndoe/live-metrics"
+date = "Jan 2021 - Present"
+role = "Designer/Developer"
+bullets = [
+  "Created a real-time metrics dashboard using WebSocket and D3.js visualization",
+  "Implemented efficient data aggregation reducing memory usage by 40%",
+]

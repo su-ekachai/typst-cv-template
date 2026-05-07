@@ -1,0 +1,14 @@
+[[category]]
+name = "Programming Languages"
+strong = ["Python", "TypeScript"]
+items = ["Go", "Rust", "Java", "SQL"]
+
+[[category]]
+name = "Technologies"
+strong = ["Docker", "Kubernetes"]
+items = ["AWS", "Terraform", "PostgreSQL", "Redis", "Kafka"]
+
+[[category]]
+name = "Spoken Languages"
+strong = ["English"]
+items = ["Spanish", "French"]
