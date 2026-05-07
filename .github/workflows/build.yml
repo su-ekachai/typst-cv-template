@@ -2,9 +2,9 @@ name: Build Resume and Cover Letter
 
 on:
   push:
-    branches: [main, master]
+    branches: [main]
   pull_request:
-    branches: [main, master]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -17,8 +17,6 @@ jobs:
 
       - name: Setup Typst
         uses: typst-community/setup-typst@v4
-        with:
-          typst-version: latest
 
       - name: Setup data from examples
         run: |
@@ -26,32 +24,15 @@ jobs:
             cp "$f" "${f%.example.toml}.toml"
           done
 
-      - name: Create output directory
-        run: mkdir -p output
+      - name: Compile documents
+        run: |
+          mkdir -p output
+          typst compile --root . src/resume.typ output/resume.pdf
+          typst compile --root . src/cover_letter.typ output/cover_letter.pdf
 
-      - name: Compile Resume
-        run: typst compile --root . src/resume.typ output/resume.pdf
-
-      - name: Compile Cover Letter
-        run: typst compile --root . src/cover_letter.typ output/cover_letter.pdf
-
-      - name: Upload Resume PDF
+      - name: Upload PDFs
         uses: actions/upload-artifact@v4
         with:
-          name: resume
-          path: output/resume.pdf
-          retention-days: 30
-
-      - name: Upload Cover Letter PDF
-        uses: actions/upload-artifact@v4
-        with:
-          name: cover_letter
-          path: output/cover_letter.pdf
-          retention-days: 30
-
-      - name: Upload All Documents
-        uses: actions/upload-artifact@v4
-        with:
-          name: all-documents
-          path: output/
+          name: cv-documents
+          path: output/*.pdf
           retention-days: 30

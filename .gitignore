@@ -1,11 +1,11 @@
-# Typst generated files
+# Generated PDFs
 output/*.pdf
 
 # Personal data (copy *.example.toml → *.toml and fill in your info)
 data/*.toml
 !data/*.example.toml
 
-# Signature image (add your own signature.png here)
+# Signature image
 assets/images/signature.png
 
 # Claude Code local settings
@@ -14,39 +14,13 @@ assets/images/signature.png
 # Typst cache
 .typst/
 
-# OS generated files
+# OS files
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
 Thumbs.db
-desktop.ini
 
-# Editor directories and files
+# Editor files
 .idea/
 .vscode/
 *.swp
 *.swo
 *~
-*.sublime-workspace
-*.sublime-project
-
-# Backup files
-*.bak
-*.backup
-*.orig
-
-# Temporary files
-*.tmp
-*.temp
-.cache/
-
-# Node modules (if using any build tools)
-node_modules/
-
-# Python virtual environment (if any scripts)
-venv/
-.env/
-__pycache__/
