@@ -1,6 +1,6 @@
 # Typst CV Template
 
-[![Build Status](https://github.com/eakkz/eakkz-cv/actions/workflows/build.yml/badge.svg)](https://github.com/eakkz/eakkz-cv/actions/workflows/build.yml)
+[![Build Status](https://github.com/su-ekachai/typst-cv-template/actions/workflows/build.yml/badge.svg)](https://github.com/su-ekachai/typst-cv-template/actions/workflows/build.yml)
 [![Typst](https://img.shields.io/badge/Made%20with-Typst-239DAD?logo=typst&logoColor=white)](https://typst.app/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -12,7 +12,7 @@ Based on the [Modern CV](https://github.com/DeveloperPaul123/modern-cv) template
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/eakkz/eakkz-cv.git my-cv
+git clone https://github.com/su-ekachai/typst-cv-template.git my-cv
 cd my-cv
 
 # 2. Copy example data files
