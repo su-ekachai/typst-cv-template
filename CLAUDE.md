@@ -13,7 +13,7 @@ make watch-resume   # Live rebuild on file changes
 make clean          # Remove generated PDFs
 ```
 
-Underlying command: `typst compile --root . src/resume.typ output/resume.pdf`
+Underlying command: `typst compile --root . --font-path assets/fonts src/resume.typ output/resume.pdf`
 
 ## Architecture
 
@@ -28,8 +28,8 @@ data/*.toml  →  src/*.typ (templates)  →  output/*.pdf
 - **`data/*.example.toml`** — Committed examples with fake data. CI compiles against these.
 - **`src/resume.typ`** — Template that reads TOML via `toml()` and loops over entries using `#for`.
 - **`src/cover_letter.typ`** — Same pattern. Signature is conditional via `use-signature` flag in TOML.
-- **`templates/lib.typ`** — 982-line template library (Modern CV port). Provides `resume-entry()`, `resume-item()`, `resume-skill-item()`, `coverletter()`, etc.
-- **`templates/lang.toml`** — i18n strings for 10 languages.
+- **`templates/lib.typ`** — template library (Modern CV port). Provides `resume-entry()`, `resume-item()`, `resume-skill-item()`, `coverletter()`, etc.
+- **`templates/lang.toml`** — internationalization (i18n) strings for 10 languages.
 
 ## Key Patterns
 

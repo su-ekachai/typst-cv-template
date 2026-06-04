@@ -26,7 +26,7 @@ cd my-cv
 make setup
 
 # 3. Edit the TOML files in data/ with your information
-# (see "Data Files" section below)
+# (see the "Data Files" section)
 
 # 4. Build your PDF
 make resume
@@ -70,7 +70,7 @@ winget install --id Typst.Typst
 
 ## Data Files
 
-After `make setup`, edit the files in `data/` with your information. No Typst knowledge needed — just plain TOML.
+After `make setup`, edit the files in `data/` with your information. No Typst knowledge needed — plain TOML.
 
 ### `data/profile.toml` — Your identity
 
@@ -204,10 +204,10 @@ Edit the style parameters in `src/resume.typ`:
 
 ### Fonts & contact icons
 
-Fonts are **bundled in `assets/fonts/`** (all SIL OFL, redistributable) and the build points Typst at them via `--font-path assets/fonts` (already wired into the `Makefile` and CI):
+Fonts are **bundled in `assets/fonts/`** (all under the SIL Open Font License, redistributable) and the build points Typst at them via `--font-path assets/fonts` (already wired into the `Makefile` and CI):
 
 - **Source Sans 3** — the body font. Bundling it makes layout **deterministic across machines**: without it, Typst falls back to a taller font and content can overflow (e.g., a 1-page resume spilling onto page 2). With it bundled, everyone gets identical line breaks and page fit.
-- **Font Awesome 7 Free** — contact icons (phone/email/GitHub/LinkedIn). Icon *and* text/link are both emitted, so contacts stay ATS-parseable. Set `show-contact-icons: false` for plain-text URLs.
+- **Font Awesome 7 Free** — contact icons (phone/email/GitHub/LinkedIn). Icon *and* text/link are both emitted, so contacts stay parseable by Applicant Tracking Systems (ATS). Set `show-contact-icons: false` for plain-text URLs.
 
 No system font installation needed. (The name still uses **Roboto** as the header font; if it isn't installed it falls back gracefully — it's one line and doesn't affect layout.)
 

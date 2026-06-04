@@ -125,10 +125,10 @@
   ]
 }
 
-/// Show a link with an icon, specifically for Github projects
+/// Show a link with an icon, specifically for GitHub projects
 /// *Example*
 /// #example(`resume.github-link("DeveloperPaul123/awesome-resume")`)
-/// - github-path (string): The path to the Github project (e.g. "DeveloperPaul123/awesome-resume")
+/// - github-path (string): The path to the GitHub project (e.g. "DeveloperPaul123/awesome-resume")
 /// -> none
 #let github-link(github-path) = {
   set box(height: 11pt)
@@ -183,13 +183,13 @@
 
 /// ---- Resume Template ----
 
-/// Resume template that is inspired by the Awesome CV Latex template by posquit0. This template can loosely be considered a port of the original Latex template.
+/// Resume template that is inspired by the Awesome CV LaTeX template by posquit0. This template can loosely be considered a port of the original LaTeX template.
 ///
 /// The original template: https://github.com/posquit0/Awesome-CV
 ///
 /// - author (dictionary): Structure that takes in all the author's information
 /// - profile-picture (image): The profile picture of the author. This will be cropped to a circle and should be square in nature.
-/// - contact-items-separator (content): Separator to use between the "contact" items in the header of the resume. This includes items like your email, website, Github account, phone number and so on. The default is blank spacing.
+/// - contact-items-separator (content): Separator to use between the "contact" items in the header of the resume. This includes items like your email, website, GitHub account, phone number and so on. The default is blank spacing.
 /// - date (string): The date the resume was created
 /// - accent-color (color): The accent color of the resume
 /// - colored-headers (boolean): Whether the headers should be colored or not
@@ -343,7 +343,6 @@
       #if ("icon" in item and show-contact-icons) {
         [#item.icon]
       }
-      // Then modify the selection to use the constant:
       #box(inset: contact-item-inset)[
         #if ("link" in item) {
           link(link-prefix + item.link)[#item.text]
@@ -659,7 +658,7 @@
   ]
 }
 
-/// Cover letter template that is inspired by the Awesome CV Latex template by posquit0. This template can loosely be considered a port of the original Latex template.
+/// Cover letter template that is inspired by the Awesome CV LaTeX template by posquit0. This template can loosely be considered a port of the original LaTeX template.
 /// This coverletter template is designed to be used with the resume template.
 /// - author (dictionary): Structure that takes in all the author's information. The following fields are required: firstname, lastname, positions. The following fields are used if available: email, phone, github, linkedin, orcid, address, website, custom. The `custom` field is an array of additional entries with the following fields: text (string, required), icon (string, optional Font Awesome icon name), link (string, optional).
 /// - profile-picture (image): The profile picture of the author. This will be cropped to a circle and should be square in nature.

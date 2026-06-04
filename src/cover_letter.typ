@@ -3,7 +3,8 @@
 #let profile = toml("../data/profile.toml")
 #let cl = toml("../data/cover_letter.toml")
 
-// Build the author dict, including optional contact fields only when non-empty.
+// Build the author dict, including optional contact fields only when non-empty
+// (prevents stray "|" separators in the contact line).
 #let author = (
   firstname: profile.firstname,
   lastname: profile.lastname,
