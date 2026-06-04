@@ -1,3 +1,4 @@
+# PUBLIC EXAMPLE — safe to commit. Your real data lives in skills.toml (gitignored). Run: make setup
 [[category]]
 name = "Programming Languages"
 strong = ["Python", "TypeScript"]

@@ -1,3 +1,4 @@
+# PUBLIC EXAMPLE — safe to commit. Your real data lives in projects.toml (gitignored). Run: make setup
 [[entry]]
 title = "Open Source CLI Tool"
 github = "johndoe/awesome-cli"

@@ -15,6 +15,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Privacy guard — fail if any personal data is tracked
+        run: |
+          bad=$(git ls-files \
+            | grep -E '^(data/.*\.toml|assets/images/|local/)' \
+            | grep -vE '^(data/.*\.example\.toml|assets/images/\.gitkeep)$' || true)
+          if [ -n "$bad" ]; then
+            echo "::error::Personal data is tracked in the repo:"; echo "$bad"; exit 1
+          fi
+          echo "✅ No personal data tracked."
+
       - name: Setup Typst
         uses: typst-community/setup-typst@v4
 
@@ -27,8 +37,8 @@ jobs:
       - name: Compile documents
         run: |
           mkdir -p output
-          typst compile --root . src/resume.typ output/resume.pdf
-          typst compile --root . src/cover_letter.typ output/cover_letter.pdf
+          typst compile --root . --font-path assets/fonts src/resume.typ output/resume.pdf
+          typst compile --root . --font-path assets/fonts src/cover_letter.typ output/cover_letter.pdf
 
       - name: Upload PDFs
         uses: actions/upload-artifact@v4

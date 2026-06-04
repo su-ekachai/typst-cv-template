@@ -1,3 +1,4 @@
+# PUBLIC EXAMPLE — safe to commit. Your real data lives in education.toml (gitignored). Run: make setup
 [[entry]]
 title = "University of Technology"
 location = "San Francisco, CA"

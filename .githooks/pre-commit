@@ -1,0 +1,26 @@
+#!/bin/sh
+# Pre-commit guard: refuse to commit personal data to this public repo.
+#
+# Wired via `git config core.hooksPath .githooks` (run by `make setup` or
+# `make hooks`), so this guard is tracked in the repo and auto-arms for every
+# clone — unlike .git/hooks/, which is never cloned.
+#
+# Mirrors the `make check-clean` logic; keep the two patterns in sync.
+# Blocks staging of:
+#   - data/*.toml (real CV data) at any depth, EXCEPT *.example.toml
+#   - anything under assets/images/ (e.g. signature), EXCEPT .gitkeep
+#   - anything under local/ (working drafts)
+
+bad=$(git diff --cached --name-only --diff-filter=AM \
+  | grep -E '^(data/.*\.toml|assets/images/|local/)' \
+  | grep -vE '^(data/.*\.example\.toml|assets/images/\.gitkeep)$' || true)
+
+if [ -n "$bad" ]; then
+  echo "❌ Refusing commit: personal data is staged (do NOT commit):" >&2
+  echo "$bad" | sed 's/^/   /' >&2
+  echo "   Unstage with: git restore --staged <file>" >&2
+  echo "   (Guard lives in .githooks/pre-commit — see README → Privacy & Sharing.)" >&2
+  exit 1
+fi
+
+exit 0

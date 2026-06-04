@@ -1,12 +1,18 @@
-# Generated PDFs
-output/*.pdf
+# Generated output (PDFs, preview/PNG renders, etc.) — keep the dir, not its contents
+output/*
+!output/.gitkeep
 
 # Personal data (copy *.example.toml → *.toml and fill in your info)
-data/*.toml
+# Ignore real data at any depth; keep only the committed examples.
+data/**/*.toml
 !data/*.example.toml
 
-# Signature image
-assets/images/signature.png
+# Personal images (signature, scans, etc.) — keep the dir, ignore its contents
+assets/images/*
+!assets/images/.gitkeep
+
+# Local files
+local/
 
 # Claude Code local settings
 .claude/

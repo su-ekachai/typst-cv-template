@@ -1,3 +1,4 @@
+# PUBLIC EXAMPLE — safe to commit. Your real data lives in profile.toml (gitignored). Run: make setup
 firstname = "John"
 lastname = "Doe"
 email = "john.doe@example.com"
@@ -6,3 +7,7 @@ github = "johndoe"
 linkedin = "johndoe"
 homepage = "https://johndoe.dev"
 positions = ["Senior Software Engineer"]
+
+# Professional summary shown at the top of the resume (3-4 lines).
+# Leave empty ("") to hide the Summary section.
+summary = "Senior Software Engineer with 8+ years building scalable, data-intensive backend systems. Specializes in distributed architectures, cloud platforms, and turning ambiguous requirements into reliable services that serve millions of users."

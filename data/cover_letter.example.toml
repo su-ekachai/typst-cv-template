@@ -1,3 +1,4 @@
+# PUBLIC EXAMPLE — safe to commit. Your real data lives in cover_letter.toml (gitignored). Run: make setup
 [company]
 target = "Hiring Manager"
 name = "Acme Corporation"

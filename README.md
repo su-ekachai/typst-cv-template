@@ -8,6 +8,13 @@ A data-driven Resume and Cover Letter template built with [Typst](https://typst.
 
 Based on the [Modern CV](https://github.com/DeveloperPaul123/modern-cv) template (port of [Awesome-CV](https://github.com/posquit0/Awesome-CV)).
 
+## Two ways to use this repo
+
+- **Use it as a template (most people):** run `make setup`, edit the files in `data/`, then `make resume`. Your real data stays on your machine — only the template ships.
+- **Maintain or contribute:** edit `src/` + `templates/`, and keep personal data out of commits. `make setup` installs a pre-commit hook that blocks personal data automatically; run `make verify` before pushing.
+
+Either way, your private content (`data/*.toml`, `assets/images/`, `local/`) is gitignored and never reaches GitHub — see [Privacy & Sharing](#privacy--sharing).
+
 ## Quick Start
 
 ```bash
@@ -15,7 +22,7 @@ Based on the [Modern CV](https://github.com/DeveloperPaul123/modern-cv) template
 git clone https://github.com/su-ekachai/typst-cv-template.git my-cv
 cd my-cv
 
-# 2. Copy example data files
+# 2. Copy example data files + install the privacy pre-commit hook
 make setup
 
 # 3. Edit the TOML files in data/ with your information
@@ -45,22 +52,20 @@ winget install --id Typst.Typst
 ```
 .
 ├── data/                          # Your CV content (TOML files)
-│   ├── profile.example.toml       # Name, contact info, links
-│   ├── experience.example.toml    # Work history
-│   ├── projects.example.toml      # Personal/open-source projects
-│   ├── skills.example.toml        # Categorized skills
-│   ├── education.example.toml     # Education
-│   └── cover_letter.example.toml  # Per-application cover letter
+│   ├── README.md                  # Explains public examples vs. private data
+│   ├── *.example.toml             # PUBLIC templates (committed, fake data)
+│   └── *.toml                     # YOUR data (gitignored; created by `make setup`)
 ├── src/                           # Typst templates (don't edit these)
 │   ├── resume.typ
 │   └── cover_letter.typ
-├── templates/                     # Template library
-│   ├── lib.typ
-│   └── lang.toml
-├── assets/images/                 # Signature image (optional)
+├── templates/                     # Template library (lib.typ, lang.toml)
+├── assets/
+│   ├── fonts/                     # Bundled fonts + licenses (committed)
+│   └── images/                    # Signature etc. (gitignored; .gitkeep tracked)
+├── .githooks/pre-commit           # Privacy guard (installed by `make setup`)
 ├── output/                        # Generated PDFs (gitignored)
 ├── Makefile                       # Build commands
-└── .github/workflows/build.yml    # CI/CD
+└── .github/workflows/build.yml    # CI/CD (+ privacy guard)
 ```
 
 ## Data Files
@@ -76,9 +81,12 @@ email = "john.doe@example.com"
 phone = "(+1) 555-123-4567"
 github = "johndoe"
 linkedin = "johndoe"
-homepage = "https://johndoe.dev"
+homepage = "https://johndoe.dev"   # optional; leave "" to omit
 positions = ["Senior Software Engineer"]
+summary = "One short paragraph (3-4 lines) shown at the top. Leave \"\" to hide."
 ```
+
+Empty optional contact fields (e.g. `homepage = ""`) are skipped automatically, so the contact line never shows stray separators.
 
 ### `data/experience.toml` — Work history
 
@@ -150,15 +158,29 @@ paragraphs = [
 
 Place your signature image at `assets/images/signature.png` and set `use-signature = true` in your cover letter data.
 
+## Privacy & Sharing
+
+This repo is safe to publish: your **content** stays local, only the **system** is shared. Four layers keep personal data out of git:
+
+1. **`.gitignore`** excludes your real data — `data/**/*.toml` (at any depth), everything in `assets/images/` (signature/scans), and all of `local/`. Only `data/*.example.toml` (fake data), `assets/images/.gitkeep`, templates, and docs are tracked.
+2. **Pre-commit hook** (`.githooks/pre-commit`, installed by `make setup`) automatically **refuses any commit** that stages personal data, so a stray `git add -A` can't leak it. It travels with the repo via `core.hooksPath`; existing clones arm it with `make hooks`.
+3. **`make check-clean`** / **`make verify`** — a manual guard you can run anytime (`verify` also builds both PDFs, mirroring CI). A good pre-push habit.
+4. **CI privacy guard** — the GitHub Actions build fails if any personal data is ever tracked, and it compiles from the examples so it never needs your real data.
+
+Keep working drafts (notes, alternate versions, metrics) in `local/` to keep them out of git. Tip: stage files explicitly (e.g. `git add src/ templates/ README.md`) rather than `git add -A`.
+
 ## Build Commands
 
 ```bash
-make setup        # Copy example files (first-time only)
+make setup        # Copy example files + install privacy hook (first-time only)
 make all          # Build resume + cover letter
-make resume       # Build resume only
+make resume       # Build resume → output/resume.pdf
 make cover_letter # Build cover letter only
 make watch-resume # Auto-rebuild on changes
 make watch-cover  # Auto-rebuild cover letter on changes
+make verify       # Privacy guard + build both (run before pushing)
+make check-clean  # Fail if personal data is staged for commit (privacy guard)
+make hooks        # Install the privacy pre-commit hook (existing clones)
 make clean        # Remove generated PDFs
 make help         # Show all commands
 ```
@@ -176,8 +198,18 @@ Edit the style parameters in `src/resume.typ`:
   language: "en",              // Language (en, de, fr, zh, th, etc.)
   paper-size: "us-letter",     // or "a4"
   show-footer: false,          // Page footer with name/date
+  show-contact-icons: true,    // true = FontAwesome contact icons (bundled in assets/fonts/); false = plain-text URLs
 )
 ```
+
+### Fonts & contact icons
+
+Fonts are **bundled in `assets/fonts/`** (all SIL OFL, redistributable) and the build points Typst at them via `--font-path assets/fonts` (already wired into the `Makefile` and CI):
+
+- **Source Sans 3** — the body font. Bundling it makes layout **deterministic across machines**: without it, Typst falls back to a taller font and content can overflow (e.g., a 1-page resume spilling onto page 2). With it bundled, everyone gets identical line breaks and page fit.
+- **Font Awesome 7 Free** — contact icons (phone/email/GitHub/LinkedIn). Icon *and* text/link are both emitted, so contacts stay ATS-parseable. Set `show-contact-icons: false` for plain-text URLs.
+
+No system font installation needed. (The name still uses **Roboto** as the header font; if it isn't installed it falls back gracefully — it's one line and doesn't affect layout.)
 
 ### Multi-language Support
 
