@@ -223,8 +223,15 @@ GitHub Actions automatically compiles your PDFs on every push. Download from the
 
 **VS Code:** Install [Tinymist](https://marketplace.visualstudio.com/items?itemName=myriad-dreamin.tinymist) for live preview (`Cmd+K V`).
 
-## License
+## Licenses & Acknowledgements
 
-MIT License. See [LICENSE](LICENSE).
+This project's templates and code are released under the MIT License (see [`LICENSE`](LICENSE)). It builds on [Modern CV](https://github.com/DeveloperPaul123/modern-cv) by Paul Tsouchlos, also MIT-licensed.
 
-Based on [Modern CV](https://github.com/DeveloperPaul123/modern-cv) by Paul Tsouchlos.
+The fonts bundled in `assets/fonts/` are third-party works under their own licenses, retained alongside the font files and **not** covered by this project's MIT License:
+
+| Font | License | License file |
+|---|---|---|
+| Source Sans 3 (© Adobe) | SIL Open Font License 1.1 | [`SOURCESANS-LICENSE.txt`](assets/fonts/SOURCESANS-LICENSE.txt) |
+| Font Awesome 7 Free | SIL Open Font License 1.1 | [`FONTAWESOME-LICENSE.txt`](assets/fonts/FONTAWESOME-LICENSE.txt) |
+
+The SIL Open Font License permits bundling and redistribution provided each copy retains the license text and copyright notice.
