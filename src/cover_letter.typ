@@ -3,17 +3,20 @@
 #let profile = toml("../data/profile.toml")
 #let cl = toml("../data/cover_letter.toml")
 
+// Build the author dict, including optional contact fields only when non-empty.
+#let author = (
+  firstname: profile.firstname,
+  lastname: profile.lastname,
+  positions: profile.positions,
+)
+#for key in ("email", "phone", "github", "linkedin", "homepage", "address") {
+  if profile.at(key, default: "") != "" {
+    author.insert(key, profile.at(key))
+  }
+}
+
 #show: coverletter.with(
-  author: (
-    firstname: profile.firstname,
-    lastname: profile.lastname,
-    email: profile.email,
-    phone: profile.phone,
-    github: profile.github,
-    linkedin: profile.linkedin,
-    homepage: profile.homepage,
-    positions: profile.positions,
-  ),
+  author: author,
   signature: if cl.letter.at("use-signature", default: false) {
     image("../assets/images/signature.png", width: 150pt)
   },

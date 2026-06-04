@@ -9,7 +9,7 @@
 #let color-darknight = rgb("#131A28")
 #let color-darkgray = rgb("#333333")
 #let color-gray = rgb("#5d5d5d")
-#let default-accent-color = rgb("#262F99")
+#let default-accent-color = rgb("#1A4D7A")
 #let default-location-color = rgb("#333333")
 
 // const icons
@@ -214,6 +214,7 @@
   paper-size: "a4",
   use-smallcaps: true,
   show-address-icon: false,
+  show-contact-icons: true,
   description: none,
   keywords: (),
   body,
@@ -252,7 +253,7 @@
 
   set page(
     paper: paper-size,
-    margin: (left: 15mm, right: 15mm, top: 10mm, bottom: 10mm),
+    margin: (left: 15mm, right: 15mm, top: 8mm, bottom: 8mm),
     footer: if show-footer [#__resume_footer(
       author,
       language,
@@ -339,7 +340,7 @@
   let contact-item(item, link-prefix: "") = {
     box[
       #set align(bottom)
-      #if ("icon" in item) {
+      #if ("icon" in item and show-contact-icons) {
         [#item.icon]
       }
       // Then modify the selection to use the constant:
@@ -391,7 +392,11 @@
     if "github" in author {
       items.push(
         contact-item(
-          (text: author.github, icon: github-icon, link: author.github),
+          (
+            text: if show-contact-icons { author.github } else { "github.com/" + author.github },
+            icon: github-icon,
+            link: author.github,
+          ),
           link-prefix: "https://github.com/",
         ),
       )
@@ -416,7 +421,7 @@
       items.push(
         contact-item(
           (
-            text: author.firstname + " " + author.lastname,
+            text: if show-contact-icons { author.linkedin } else { "linkedin.com/in/" + author.linkedin },
             icon: linkedin-icon,
             link: author.linkedin,
           ),
@@ -481,12 +486,10 @@
       }
     }
 
-    align(center + horizon)[
+    align(center)[
       #set text(size: 9pt, weight: "regular", style: "normal")
       #block[
-        #align(center + horizon)[
-          #items.join(contact-items-separator)
-        ]
+        #items.join(contact-items-separator)
       ]
     ]
   }
@@ -527,9 +530,9 @@
 /// - body (content): The body of the resume entry
 #let resume-item(body) = {
   set text(size: 10pt, style: "normal", weight: "light", fill: color-darknight)
-  set block(above: 0.75em, below: 1.25em)
-  set par(leading: 0.65em)
-  block(above: 0.5em)[
+  set block(above: 0.65em, below: 1.0em)
+  set par(leading: 0.6em)
+  block(above: 0.45em)[
     #body
   ]
 }
@@ -557,7 +560,9 @@
   } else {
     title-content = title
   }
-  block(above: 1em, below: 0.65em)[
+  // sticky: true keeps this entry header attached to the bullets that follow,
+  // so a title/company/date line is never orphaned at the bottom of a page.
+  block(above: 0.85em, below: 0.55em, sticky: true)[
     #pad[
       #justified-header(title-content, location)
       #if description != "" or date != "" [
